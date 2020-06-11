@@ -11,11 +11,16 @@
 
 class vector {
 private:
-    int x, y, z;
+    double x, y, z;
     // 3D Coordinates of the Vector
 
 public:
-    vector(int x, int y, int z)
+    vector(){
+        x = 0.0;
+        y = 0.0;
+        z = 0.0;
+    }
+    vector(double x, double y, double z)
     {
         // Constructor
         this->x = x;
@@ -26,6 +31,7 @@ public:
     vector operator-(vector v); // Subtraction
     int operator^(vector v); // Dot Product
     vector operator*(vector v); // Cross Product
+    vector operator*(double d); // Product
     double magnitude()
     {
         return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));

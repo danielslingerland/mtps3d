@@ -7,13 +7,17 @@
 
 
 #include "vector.h"
-
+#include "RNG.h"
+#include "constanten.h"
+#include <math.h>
 class mt {
 private:
     vector pos;
     vector end;
+    vector dir;
     double length;
     int state;
+    int side;
 
 public:
     mt();
