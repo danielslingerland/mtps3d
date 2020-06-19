@@ -1,6 +1,7 @@
 
 #include <iostream>
-#include "vector.h"
+//#include "vector.h"
+#include "mt.h"
 
 // calculate shortest dist. from point to line
 double shortDistance(vector line_point1, vector line_point2, vector point)
@@ -22,5 +23,33 @@ int main()
 
     std::cout << "Shortest Distance is : " << shortDistance(line_point1, line_point2, point);
 
+    //create MTS
+    mt mitus[N_MICROTUBULES];
+    for(int i = 0; i < N_MICROTUBULES; i++){
+        mitus[i] = mt();
+    }
+
+    //run timesteps
+    for(int t = 0; t < (int) T_MAX*T_STEP; t++){
+
+        for(int i = 0; i < N_MICROTUBULES; i++){
+            mitus[i].grow_shrink(T_STEP);
+        }
+
+        for(int i = 0; i < N_MICROTUBULES; i++){
+            if(mitus[i].get_state() != GROWING) continue;
+            for(int j = 0; j < N_MICROTUBULES; j++){
+                if(shortDistance(mitus[j].get_pos(), mitus[j].get_end(), mitus[i].get_end()) < BIND_DISTANCE){
+                    mitus[i].set_host(j);
+                    mitus[i].set_state(BOUND);
+                    std::cout << "bound\n";
+                    break;
+                }
+            }
+
+        }
+
+
+    }
     return 0;
 }

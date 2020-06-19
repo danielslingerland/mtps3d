@@ -18,10 +18,19 @@ private:
     double length;
     int state;
     int side;
+    int host;
+    void reset();
 
 public:
     mt();
-
+    void grow_shrink(double delta);
+    int get_state();
+    void set_state(int s);
+    vector get_pos();
+    vector get_end();
+    int get_side();
+    int get_host();
+    void set_host(int h);
 };
 
 
