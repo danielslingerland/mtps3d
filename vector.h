@@ -1,6 +1,4 @@
-//
-// Created by danie on 10-6-2020.
-//
+
 
 #ifndef MTPS3D_VECTOR_H
 #define MTPS3D_VECTOR_H
