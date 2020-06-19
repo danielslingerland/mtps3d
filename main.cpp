@@ -13,15 +13,24 @@ double shortDistance(vector line_point1, vector line_point2, vector point)
     return CD;
 }
 
+double polarity(mt* MTS){
+    double length[2] = {0, 0};
+    for(int i = 0; i < N_MICROTUBULES; i++){
+        length[MTS[i].get_side()] += MTS[i].get_length();
+    }
+    return (length[RIGHT]-length[LEFT])/(length[RIGHT]+length[LEFT]);
+}
+
+double lengths(mt* MTS){
+    double length = 0;
+    for(int i = 0; i < N_MICROTUBULES; i++){
+        length += MTS[i].get_length();
+    }
+    return length/N_MICROTUBULES;
+}
+
 int main()
 {
-    // Taking point C as (2, 2, 2)
-    // Line Passes through A(4, 2, 1)
-    // and B(8, 4, 2).
-    vector line_point1(4, 2, 1), line_point2(8, 4, 2);
-    vector point(2, 2, 2);
-
-    std::cout << "Shortest Distance is : " << shortDistance(line_point1, line_point2, point);
 
     //create MTS
     mt mitus[N_MICROTUBULES];
@@ -31,6 +40,13 @@ int main()
 
     //run timesteps
     for(int t = 0; t < (int) T_MAX*T_STEP; t++){
+        if (t%1000 == 0){
+            std::cout << polarity(mitus) << "\n";
+            std::cout << lengths(mitus) << "\n";
+        }
+        for(int i = 0; i < N_MICROTUBULES; i++){
+            mitus[i].stochastic_state_change();
+        }
 
         for(int i = 0; i < N_MICROTUBULES; i++){
             mitus[i].grow_shrink(T_STEP);
@@ -39,10 +55,11 @@ int main()
         for(int i = 0; i < N_MICROTUBULES; i++){
             if(mitus[i].get_state() != GROWING) continue;
             for(int j = 0; j < N_MICROTUBULES; j++){
+                if(mitus[i].get_side() == mitus[j].get_side()) continue;
                 if(shortDistance(mitus[j].get_pos(), mitus[j].get_end(), mitus[i].get_end()) < BIND_DISTANCE){
                     mitus[i].set_host(j);
                     mitus[i].set_state(BOUND);
-                    std::cout << "bound\n";
+                    //std::cout << shortDistance(mitus[j].get_pos(), mitus[j].get_end(), mitus[i].get_end()) << " bound\n";
                     break;
                 }
             }

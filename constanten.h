@@ -8,7 +8,7 @@
 //Values from Xavi Fernandez-Luengo Flores MSc Thesis (Table 4.11)
 //T : seconds (s)
 #define T_STEP 0.1
-#define N_MICROTUBULES 1000
+#define N_MICROTUBULES 100
 //R : per second (s^-1)
 #define R_CATASTROPHE 0.005
 #define R_RESCUE 0.0068
@@ -19,15 +19,19 @@
 //P: probability
 #define P_RIGHT 0.5
 
-#define T_MAX 10000
+const double P_CATASTROPHE = R_CATASTROPHE*T_STEP;
+const double P_RESCUE = R_RESCUE*T_STEP;
+const double P_UNBIND = R_UNBIND*T_STEP;
+
+#define T_MAX 1000000
 
 //daniel:
 #define HOST_PENALTY_FACTOR 1
-#define BIND_DISTANCE 5
+#define BIND_DISTANCE 2
 
-#define X_MAX 10000
-#define Y_MAX 100000
-#define Z_MAX 10000
+#define X_MAX 10
+#define Y_MAX 1000
+#define Z_MAX 10
 enum{X, Y, Z};
 enum{GROWING, SHRINKING, BOUND};
 enum{RIGHT, LEFT};

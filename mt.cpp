@@ -26,8 +26,31 @@ void mt::grow_shrink(double delta){
 
 }
 
+void mt::stochastic_state_change(){
+    double rand = dasl::mt_rng();
+    if(state == GROWING){
+        if(rand < P_CATASTROPHE){
+            state = SHRINKING;
+        }
+    }else if(state == SHRINKING){
+        if(rand < P_RESCUE){
+            state = GROWING;
+        }
+
+    }else if(state == BOUND){
+        if(rand < P_UNBIND){
+            state = SHRINKING;
+            host = -1;
+        }
+
+    }
+
+}
+
 void mt::reset(){
     length = 0.0;
+    host = -1;
+    state = GROWING;
     double x = dasl::mt_rng()*X_MAX;
     double y = dasl::mt_rng()*Y_MAX;
     double z = dasl::mt_rng()*Z_MAX;
@@ -70,4 +93,7 @@ int mt::get_host(){
 }
 void mt::set_host(int h) {
     host = h;
+}
+double mt::get_length(){
+    return length;
 }

@@ -30,7 +30,9 @@ public:
     vector get_end();
     int get_side();
     int get_host();
+    double get_length();
     void set_host(int h);
+    void stochastic_state_change();
 };
 
 
