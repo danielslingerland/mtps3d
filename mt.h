@@ -15,11 +15,12 @@ private:
     vector pos;
     vector end;
     vector dir;
-    double length;
-    int state;
-    int side;
-    int host;
-    double bind_pos;
+    double length{};
+    int state{};
+    int side{};
+    int host{};
+    double bind_pos{};
+    int n_guests;
     void reset();
 
 public:
@@ -36,6 +37,8 @@ public:
     void stochastic_state_change();
     double get_bind_pos();
     void set_bind_pos(double bp);
+    void add_guest();
+    void min_guest();
 };
 
 

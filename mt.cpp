@@ -48,6 +48,7 @@ void mt::stochastic_state_change(){
 }
 
 void mt::reset(){
+    n_guests = 0;
     length = 0.0;
     host = -1;
     state = GROWING;
@@ -55,17 +56,17 @@ void mt::reset(){
     double y = dasl::mt_rng()*Y_MAX;
     double z = dasl::mt_rng()*Z_MAX;
     pos = vector(x, y, z);
-    double angle = dasl::norm_rng()*(1/6)*M_PI;
-    double derec = dasl::mt_rng()*2*M_PI;
+    double angle = dasl::norm_rng()*(1.0/6.0)*M_PI;
+    double derec = dasl::mt_rng()*2.0*M_PI;
 
-    if(dasl::mt_rng() > 0.5){
+    if(dasl::mt_rng() > P_RIGHT){
         angle += M_PI;
     }
-    double abs_angle = abs(angle);
-    while(abs_angle-M_PI > 0){
-        abs_angle -= M_PI;
+    double abs_angle = abs(angle+0.5*M_PI);
+    while(abs_angle-2*M_PI > 0){
+        abs_angle -= 2*M_PI;
     }
-    if(abs_angle < 0.5*M_PI){
+    if(abs_angle < M_PI){
         side = RIGHT;
     }else{
         side = LEFT;
@@ -108,4 +109,10 @@ double mt::get_bind_pos() {
 }
 void mt::set_bind_pos(double bp){
     bind_pos = bp;
+}
+void mt::add_guest() {
+    n_guests += 1;
+}
+void mt::min_guest(){
+    n_guests -= 1;
 }

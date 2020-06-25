@@ -69,12 +69,15 @@ int main()
                         mitus[i].set_bind_pos(bind_pos);
                         mitus[i].set_host(j);
                         mitus[i].set_state(BOUND);
+                        mitus[j].add_guest();
+
                     }
                 }
             }else if(mitus[i].get_state() == BOUND){
                 if(mitus[mitus[i].get_host()].get_length() < mitus[i].get_bind_pos()){
                     mitus[i].set_state(SHRINKING);
                     mitus[i].set_host(-1);
+                    mitus[mitus[i].get_host()].min_guest();
                 }
             }
 

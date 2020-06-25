@@ -30,7 +30,6 @@ const double P_UNBIND = R_UNBIND*T_STEP;
 #define X_MAX 20
 #define Y_MAX 300
 #define Z_MAX 10
-enum{X, Y, Z};
 enum{GROWING, SHRINKING, BOUND};
 enum{RIGHT, LEFT};
 
