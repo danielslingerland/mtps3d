@@ -59,10 +59,16 @@ void mt::reset(){
     double derec = dasl::mt_rng()*2*M_PI;
 
     if(dasl::mt_rng() > 0.5){
+        angle += M_PI;
+    }
+    double abs_angle = abs(angle);
+    while(abs_angle-M_PI > 0){
+        abs_angle -= M_PI;
+    }
+    if(abs_angle < 0.5*M_PI){
         side = RIGHT;
     }else{
         side = LEFT;
-        angle += M_PI;
     }
 
     x = cos(derec)*sin(angle);
@@ -96,4 +102,10 @@ void mt::set_host(int h) {
 }
 double mt::get_length(){
     return length;
+}
+double mt::get_bind_pos() {
+    return bind_pos;
+}
+void mt::set_bind_pos(double bp){
+    bind_pos = bp;
 }

@@ -19,6 +19,7 @@ private:
     int state;
     int side;
     int host;
+    double bind_pos;
     void reset();
 
 public:
@@ -33,6 +34,8 @@ public:
     double get_length();
     void set_host(int h);
     void stochastic_state_change();
+    double get_bind_pos();
+    void set_bind_pos(double bp);
 };
 
 

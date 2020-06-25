@@ -27,7 +27,7 @@ public:
     }
     vector operator+(vector v); // ADD 2 Vectors
     vector operator-(vector v); // Subtraction
-    int operator^(vector v); // Dot Product
+    double operator^(vector v); // Dot Product
     vector operator*(vector v); // Cross Product
     vector operator*(double d); // Product
     double magnitude()

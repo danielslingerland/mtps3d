@@ -22,7 +22,7 @@ vector vector::operator-(vector v)
 }
 
 // Dot product of 2 vectors
-int vector::operator^(vector v)
+double vector::operator^(vector v)
 {
     double x1, y1, z1;
     x1 = x * v.x;
