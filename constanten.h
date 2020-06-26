@@ -6,7 +6,7 @@
 //Values from Xavi Fernandez-Luengo Flores MSc Thesis (Table 4.11)
 //T : seconds (s)
 #define T_STEP 0.1
-#define N_MICROTUBULES 200
+#define N_MICROTUBULES 1
 //R : per second (s^-1)
 #define R_CATASTROPHE 0.005
 #define R_RESCUE 0.0068
@@ -21,7 +21,7 @@ const double P_CATASTROPHE = R_CATASTROPHE*T_STEP;
 const double P_RESCUE = R_RESCUE*T_STEP;
 const double P_UNBIND = R_UNBIND*T_STEP;
 
-#define T_MAX 1000000
+#define T_MAX 110000000
 
 //daniel:
 #define HOST_PENALTY_FACTOR 1

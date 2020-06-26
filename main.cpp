@@ -2,6 +2,7 @@
 #include <iostream>
 //#include "vector.h"
 #include "mt.h"
+#include "FileWriter.h"
 
 // calculate shortest dist. from point to line
 double shortDistance(vector line_point1, vector line_point2, vector point)
@@ -41,12 +42,35 @@ int main()
     for(int i = 0; i < N_MICROTUBULES; i++){
         mitus[i] = mt();
     }
+    FileWriter state = FileWriter("state");
+    FileWriter side = FileWriter("side");
+    FileWriter length = FileWriter("length");
+    state.writeParameters();
+    side.writeParameters();
+    length.writeParameters();
 
+    int incubation_time = 1000000;
+    int states[1000];
+    int sides[1000];
+    double lengthss[1000];
+    int k = 0;
     //run timesteps
     for(int t = 0; t < (int) T_MAX*T_STEP; t++){
-        if (t%1000 == 0){
+        if (t%incubation_time == 0){
             std::cout << polarity(mitus) << "\n";
             std::cout << lengths(mitus) << "\n";
+        }
+        if (t > incubation_time){
+            if( k >= 1000){
+                state.writeIntArray(states, 1000);
+                side.writeIntArray(sides, 1000);
+                length.writeDoubleArray(lengthss, 1000);
+                k=0;
+            }
+            sides[k] = mitus[0].get_side();
+            states[k] = mitus[0].get_state();
+            lengthss[k] = mitus[0].get_length();
+            k++;
         }
         for(int i = 0; i < N_MICROTUBULES; i++){
             mitus[i].stochastic_state_change();
@@ -85,5 +109,6 @@ int main()
 
 
     }
+
     return 0;
 }
