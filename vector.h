@@ -4,7 +4,7 @@
 #define MTPS3D_VECTOR_H
 
 
-#include <cmath>
+#include <math.h>
 #include <ostream>
 
 class vector {
