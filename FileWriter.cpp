@@ -23,7 +23,7 @@ FileWriter::FileWriter(string fname) {
     filename = "../DATA/"+final_name;
 }
 
-void FileWriter::writeParameters(){
+void FileWriter::writeParameters(double x, double y, double z){
     time_t now = time(0);
     char* dt = ctime(&now);
     ofstream myfile;
@@ -38,6 +38,9 @@ void FileWriter::writeParameters(){
     myfile << "V_SHRINK: " << V_SHRINK << "\n";
     myfile << "P_RIGHT: " << P_RIGHT << "\n";
     myfile << "HOST_PENALTY_FACTOR: " << HOST_PENALTY_FACTOR << "\n";
+    myfile << "X_MAX: " << x << "\n";
+    myfile << "Y_MAX: " << y << "\n";
+    myfile << "Z_MAX: " << z << "\n";
     myfile << "DATA\n";
     myfile.close();
 }

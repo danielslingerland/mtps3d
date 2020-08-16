@@ -16,7 +16,7 @@ private:
     std::string filename;
 public:
     FileWriter(std::string fname);
-    void writeParameters();
+    void writeParameters(double x, double y, double z);
     void writeString(std::string note);
     void writeDouble(double data);
     void writeDoubleArray(double data[], int n_data);

@@ -9,10 +9,11 @@
 
 class vector {
 private:
-    double x, y, z;
+
     // 3D Coordinates of the Vector
 
 public:
+    double x, y, z;
     vector(){
         x = 0.0;
         y = 0.0;

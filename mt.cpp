@@ -4,15 +4,22 @@
 
 #include "mt.h"
 
-
-mt::mt(){
+mt::mt(){}
+mt::mt(double x, double y, double z){
+    X_MAX = x;
+    Y_MAX = y;
+    Z_MAX = z;
     reset();
 }
 
-void mt::grow_shrink(double delta){
+bool mt::grow_shrink(double delta){
     if(state == GROWING){
-        length += delta*V_GROW;
-        end = end+dir*(delta*V_GROW);
+
+        vector new_end = end+dir*(delta*V_GROW);
+        //if(new_end.x < X_MAX and new_end.x > 0 and new_end.y < Y_MAX and new_end.y > 0 and new_end.z < Z_MAX and new_end.z > 0) {
+            length += delta*V_GROW;
+            end = new_end;
+        //}
 
     }else if(state == SHRINKING){
         length -= delta*V_SHRINK;
@@ -20,9 +27,11 @@ void mt::grow_shrink(double delta){
             end = end-dir*(delta*V_GROW);
         }else{
             reset();
+            return true;
         }
 
     }
+    return false;
 
 }
 
@@ -72,8 +81,8 @@ void mt::reset(){
         side = LEFT;
     }
 
-    x = cos(derec)*sin(angle);
-    y = cos(angle);
+    x = cos(angle);
+    y = cos(derec)*sin(angle);
     z = sin(derec)*sin(angle);
     dir = vector(x, y, z);
     end = pos;
@@ -91,6 +100,10 @@ vector mt::get_pos(){
 }
 vector mt::get_end(){
     return end;
+}
+
+vector mt::get_dir(){
+    return dir;
 }
 int mt::get_side(){
     return side;
@@ -115,4 +128,9 @@ void mt::add_guest() {
 }
 void mt::min_guest(){
     n_guests -= 1;
+}
+
+void mt::set_side(int s){
+    side = s;
+
 }
